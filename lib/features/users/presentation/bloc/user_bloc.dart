@@ -1,8 +1,8 @@
 import 'package:ecom/features/users/domain/model/user_model.dart';
 import 'package:ecom/features/users/domain/usecases/get_users_usecase.dart';
 import 'package:ecom/utils/app_preferences.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:equatable/equatable.dart';
 
 part 'user_event.dart';
 part 'user_state.dart';
@@ -16,7 +16,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }) : super(UserInitialState()) {
     //--Get-Users---
     on<LoadUserEvent>((event, emit) async {
-      emit(const UserLoadingState());
+       emit(const UserLoadingState());
       var auth = await getUsersUseCase.execute();
       auth.fold(
         (left) {

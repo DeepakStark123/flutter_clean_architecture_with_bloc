@@ -12,7 +12,7 @@ class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
 
   @override
-  _SignupScreenState createState() => _SignupScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
 class _SignupScreenState extends State<SignupScreen> {
@@ -49,7 +49,6 @@ class _SignupScreenState extends State<SignupScreen> {
                     content: Text(
                         'Signup successful! Token: ${state.signUpModel.token}')),
               );
-
               AppNavigator.pushReplacement(context, const LoginScreen());
             } else if (state is AuthErrorState) {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -61,7 +60,6 @@ class _SignupScreenState extends State<SignupScreen> {
             if (state is AuthLoadingState) {
               return const Center(child: CircularProgressIndicator());
             }
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
