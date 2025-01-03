@@ -7,40 +7,52 @@ It is structured in a modular fashion with a separation of concerns, making it e
 ## Project Structure
 
 ```plaintext
+
 lib
-├── core                   # Core functionalities and shared components
-│   ├── constants          # Application constants like images, URLs, etc.
-│   ├── colors             # Color definitions for the entire app
-│   ├── enum               # Enum types for managing states and other shared enums
-│   ├── style              # App styles like text styles, padding, and themes
-│   ├── usecase            # Defines use case implementations, outlining application business logic
-│   ├── validation         # Input validation utilities for form validation, etc.
-│   └── error              # Error handling classes, including custom exceptions and failure models
+├── core                   # Core functionalities and shared components used throughout the app
+│   ├── constants          # Defines static constants such as asset paths, API URLs, and keys
+│   ├── colors             # Centralized color palette for maintaining consistent color usage
+│   ├── enum               # Enum definitions for managing application states and reusable enums
+│   ├── style              # Styling definitions like text styles, spacing, themes, and custom typography
+│   ├── usecase            # Business logic for executing specific actions, keeping domain logic reusable
+│   ├── validation         # Utilities for validating user inputs (e.g., form fields, regex checks)
+│   └── error              # Handles application errors using custom exceptions and failure models
 │
-├── config                 # Application configuration, including themes and routes
-│   ├── theme              # Global theme settings for the app
-│   └── routes             # Route management files defining app navigation
+├── config                 # Configuration files for app-wide settings
+│   ├── theme              # Global theme configuration for light/dark mode and color schemes
+│   └── routes             # Route definitions and navigation configuration for the app
 │
-├── features               # Feature-based modules, adhering to clean architecture principles
-│   ├── auth               # Authentication-related functionality
-│   │   ├── data           # Data sources, models, repositories
-│   │   │   ├── datasources  # API services and data fetching sources
-│   │   │   ├── repositories # Repository implementations bridging data sources and domain
-│   │   │   └── entity       # Data models specific to data sources
-│   │   ├── domain         # Domain models, repository interfaces, and use cases
-│   │   │   ├── repositories # Abstract repository interfaces
-│   │   │   ├── model        # Domain models, representing business entities
-│   │   │   └── usecases     # Use cases representing specific business actions
-│   │   └── presentation   # UI and Bloc (state management) for the feature
-│   │       ├── screen       # Screens related to auth (e.g., login, signup)
-│   │       ├── widgets      # Reusable widgets for auth (buttons, forms, etc.)
-│   │       └── bloc         # BLoC files for state management (auth events, states, bloc)
-│   ├── splash             # Splash screen feature setup with a similar structure
-│   └── users              # User-related features (profile, user details, etc.), structured similarly
+├── features               # Feature-based modules for adhering to clean architecture
+│   ├── auth               # Authentication module, handling login, signup, and user sessions
+│   │   ├── data           # Handles data-related functionality for authentication
+│   │   │   ├── datasources  # Sources for fetching auth data (e.g., APIs, local storage)
+│   │   │   ├── repositories # Implements repositories to abstract data source logic
+│   │   │   └── entity       # Data models specific to API or local storage (e.g., API response models)
+│   │   ├── domain         # Core business logic for authentication
+│   │   │   ├── repositories # Abstract repository interfaces to enforce coding contracts
+│   │   │   ├── model        # Domain-specific models representing business entities (e.g., User)
+│   │   │   └── usecases     # Specific use cases like "LoginUser" or "RegisterUser"
+│   │   └── presentation   # UI-related files and state management for authentication
+│   │       ├── screen       # Screens like LoginPage, SignupPage, or ForgotPasswordPage
+│   │       ├── widgets      # Custom widgets for authentication (e.g., input fields, buttons)
+│   │       └── bloc         # BLoC files for managing authentication states and events
+│   ├── splash             # Splash screen feature, initializing app dependencies and checking sessions
+│   │   ├── data           # Handles splash-specific data (if needed, like remote config fetching)
+│   │   ├── domain         # Splash-related domain logic (if required)
+│   │   └── presentation   # UI and state management for the splash screen
+│   └── users              # Features related to user functionality (e.g., profiles, settings, etc.)
+│       ├── data           # User-specific data handling (e.g., API requests, local storage)
+│       ├── domain         # Core logic for user actions (e.g., updating profiles, fetching details)
+│       └── presentation   # UI and state management for user-related screens and interactions
 │
-├── utils                  # Utility classes and helper functions (e.g., navigation, shared preferences)
+├── utils                  # General utility classes and helper functions (e.g., shared preferences, API helpers)
 │
-└── widgets                # Shared widgets used across the app, such as custom buttons,appbar
+├── widgets                # Shared and reusable widgets across the app (e.g., custom buttons, app bars)
+│
+├── injection_container.dart  # Dependency injection setup using packages like GetIt or Provider
+│
+└── main.dart                 # Entry point of the application, initializing app configurations and running the app
+
 ```
 
 ## Folder Details
@@ -76,7 +88,7 @@ Reusable widgets that are shared across various parts of the application.
 Clone the repository and install dependencies.
 
 ```bash
-git clone <My-Repository-Url>
+git clone https://github.com/DeepakStark123/flutter_clean_architecture_with_bloc
 cd ecom
 flutter clean
 flutter pub get
